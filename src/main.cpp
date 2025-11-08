@@ -76,18 +76,18 @@ struct SequencerConfig {
     std::vector<double> deflection_targets_deg {
         0.0, 4.0, 8.0,
         4.0, 0.0,
-        -4.0, -8.0,
-        -4.0, 0.0
+        -2.0, -4.0, -6.0, -8.0,
+        -6.0, -4.0, -2.0, 0.0
     }; // cycle
 
     // Δv threshold [m/s]: advance to the next target only after the *absolute*
     // change in vertical velocity since the last switch exceeds this value.
     // Lower => more frequent switches (denser velocity coverage).
-    double dv_per_step = 1;        // m/s change in |vz| to advance state
+    double dv_per_step = 20;        // m/s change in |vz| to advance state
 
     // Minimum dwell time [s]: don’t switch faster than this even if Δv is met.
     // Prevents chattering at high acceleration and respects servo/logger limits.
-    double min_dwell_s = 1;        // s minimum time to hold a state
+    double min_dwell_s = 0.4;        // s minimum time to hold a state
 
     // Servo angular speed limit [deg/s] from datasheet/bench test (slew rate).
     // Your servo is ~0.11–0.14 s per 60° => ~430–545 deg/s no-load.
